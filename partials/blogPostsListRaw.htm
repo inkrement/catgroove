@@ -1,0 +1,33 @@
+==
+{% for post in blogPosts.posts %}
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <h2 class="post-title">
+      <a href="{{ post.url }}" itemprop="url">
+        <span itemprop="headline">{{ post.title }}</span>
+      </a>
+    </h2>
+
+    <p class="post-excerpt" itemprop="description">{{ post.excerpt }}</p>
+
+    <p class="post-info">
+        
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        <time itemprop="datePublished" datetime="{{ post.published_at|date('Y-m-d') }}">{{ post.published_at|date('F dS, Y') }}</time>
+        
+        {% if post.categories.count %}
+        <i class="fa fa-tags" aria-hidden="true"></i>
+        <span class="keywords" itemprop="keywords">
+        
+          {% for category in post.categories %}
+              <a href="{{ category.url }}">{{ category.name }}</a>
+          {% endfor %}
+        
+        </span>
+        {% endif %}
+    </p>
+
+  </article>
+
+{% endfor %}

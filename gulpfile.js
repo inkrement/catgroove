@@ -7,20 +7,20 @@ const sass			= require('gulp-sass');
 const autoprefix	= require('gulp-autoprefixer');
 const notify		= require('gulp-notify');
 const bower			= require('gulp-bower');
-const bower_files	= require('main-bower-files');
 const run_sequence	= require('run-sequence');
 const imagemin 		= require('gulp-imagemin');
 const pngquant 		= require('imagemin-pngquant');
+const flatten = require('gulp-flatten');
 
 gulp.task('bower', function() {
 	return bower();
 });
 
 gulp.task('vendor-scripts', ['bower'], function () {
-
 	return gulp
 		.src([
 			'bower_components/jquery/dist/jquery.min.js',
+			'bower_components/highlightjs/highlight.pack.min.js'
 		])
 		.pipe(concat('vendor.js'))
 		.pipe(gulp.dest('src/js/'))
@@ -30,37 +30,34 @@ gulp.task('vendor-scripts', ['bower'], function () {
 
 });
 
-gulp.task('vendor-css', ['bower'], function () {
+gulp.task('vendor-scss', function() {
+// vendor scss files are wired up in a vendor scss file to support variable declarations
+  gulp.src('src/sass/vendor.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('src/css/vendor')).pipe(notify({
+		  message: 'vendor scss compiled!'
+		}));
+});
 
-	// Bower css
-	var bower_css = bower_files('**/*.css');
+gulp.task('vendor-css', ['bower', 'vendor-scss'], function () {
+	var vendor_css_files = [
+		'./bower_components/highlightjs/styles/obsidian.css',
+		'./src/css/vendor/vendor.css'
+	];
 
 	return gulp
-		.src(bower_css)
+		.src(vendor_css_files)
 		.pipe(concat_css('vendor.css'))
 		.pipe(gulp.dest('src/css/'))
 		.pipe(notify({
 		  message: 'vendor css'
 		}));
-
-});
-
-gulp.task('bootstrap', function() {
-  gulp.src('bower_components/bootstrap/scss/bootstrap.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(minify())
-    .pipe(gulp.dest('src/css/')).pipe(notify({
-		  message: 'bootstrap compiled!'
-		}));
 });
 
 gulp.task('vendor-fonts', ['bower'], function () {
-
-	// Bower fonts
-	var bower_fonts = bower_files('**/fonts/*.*');
-
 	return gulp
-		.src(bower_fonts)
+	  .src('./bower_components/**/*.{eot,svg,ttf,woff,woff2}')
+		.pipe(flatten())
 		.pipe(gulp.dest('assets/fonts/'))
 		.pipe(notify({
 		  message: 'vendor fonts'
@@ -95,7 +92,7 @@ gulp.task('sass', ['vendor-css'], function () {
 	}));
 });
 
-gulp.task('css', ['vendor-css', 'sass', 'bootstrap'], function () {
+gulp.task('css', ['sass'], function () {
 	return gulp.src([
 		'src/css/vendor.css',
 		'src/css/bootstrap.css',
@@ -131,5 +128,5 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', function() {
-	run_sequence('bower', 'image-min', 'vendor-fonts','css', 'scripts');
+	run_sequence('bower', 'image-min', 'vendor-fonts', 'vendor-scss', 'vendor-css', 'css', 'scripts');
 });

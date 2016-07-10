@@ -1,0 +1,95 @@
+title = "Blog Post"
+url = "/post/:slug"
+layout = "default"
+is_hidden = 0
+
+[blogPost]
+slug = "{{ :slug }}"
+categoryPage = "blog/tag"
+==
+<?php
+function onStart(){
+    //var_dump(Redirect::back());
+    //$this['back'] = Redirect::back();
+}
+
+
+function onEnd()
+{
+  if (isset($this['post'])) {
+    $this->page->title = $this->post->title;
+    $this->page->description = $this->post->excerpt;
+
+    if (count($this->post->featured_images) != 0) {
+      $this['metaImage'] = URL::to($this->post->featured_images[0]->path);
+    }
+  }
+  else {
+    return $this->controller->run('/404');
+  }
+}
+?>
+==
+{% set post = blogPost.post %}
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+      
+    
+    <a href="/" id="homelink">
+    
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-circle-thin fa-stack-2x"></i>
+      <i class="fa fa-home fa-stack-1x"></i>
+    </span>
+    
+    Home</a> <br><br>
+    
+    
+    
+    <article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
+
+      <div class="blog-header">
+
+        <h1 class="content-heading" itemprop="headline">{{ post.title }}</h1>
+
+        {% for image in post.featured_images %}
+
+          <img class="blog-featured-image" src="{{ image.path|app }}" alt="{{ image.description }}" itemprop="image">
+
+        {% endfor %}
+
+        {% if post.excerpt %}
+
+          <p class="lead blog-excerpt" itemprop="description">{{ post.excerpt }}</p>
+
+        {% endif %}
+
+      </div>
+
+      <div class="markdown-body" itemprop="articleBody">
+        {{ post.content_html|raw }}
+      </div>
+
+      <footer class="blog-footer">
+
+        <hr>
+
+        <p class="info">
+            Posted
+            {% if post.categories.count %} in
+                <span itemprop="keywords">
+                  {% for category in post.categories %}
+                      <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
+                  {% endfor %}
+                </span>
+            {% endif %}
+            on <time itemprop="datePublished" datetime="{{ post.published_at|date('Y-m-d') }}">{{ post.published_at|date('M d, Y') }}</time>
+            by <span itemprop="author">{{ post.user.full_name }}</span>
+        </p>
+
+      </footer>
+
+    </article>
+  </div>
+</div>

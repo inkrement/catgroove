@@ -1,6 +1,4 @@
-assets/js/all.min.js
-assets/css/all.min.css
-src
+assets
 
 # Numerous always-ignore extensions
 *.diff

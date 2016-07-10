@@ -1,0 +1,7 @@
+@import "vars";
+
+/*
+ * ADD NEW VENDOR SCSS IMPORTS HERE. Overwrite their default variables in src/sass/_vars.scss
+ */
+@import "../../bower_components/bootstrap/scss/bootstrap.scss";
+@import "../../bower_components/font-awesome/scss/font-awesome.scss";

@@ -3,6 +3,151 @@
 @import "vars";
 @import "mixins";
 @import "keyframes";
+
+//Bootstrap 4 imports
+
+//@import "../../bower_components/bootstrap/scss/mixins/center-block";
+//@import "../../bower_components/font-awesome/scss/fontawesome";
+
 //----------------------------------*\
 // GENERAL
 //----------------------------------*/
+
+header {
+  margin:60px 0 40px 0;
+}
+
+footer {
+  margin: 40px 0 60px 0;
+}
+
+
+.menu {
+  & ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+
+    & li {
+      display: inline;
+    }
+  }
+}
+
+.blog-post {
+
+  & ul:last-of-type {
+    //use number as symbol for last list (links)
+    //list-style-type: decimal;
+  }
+
+  & blockquote {
+    padding: .5rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    border-left: .25rem solid #eceeef
+  }
+
+
+   & a {
+    // Break long links
+    // https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  & img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.post {
+  padding-bottom: 20px;
+
+  /*
+  & p {
+    font-family: $font-family-serif;
+  }
+  */
+
+  // post date
+  & time {
+    font-weight: bold;
+  }
+
+  // post heading
+  & .post-title > a {
+   & span {
+     font-weight: lighter;
+     color: #4e5c75; // #1c84b0;
+   }
+   &:hover {
+     text-decoration: none;
+   }
+ }
+
+ & .post-info {
+   color: $gray;
+
+   a {
+     color: $gray;
+   }
+
+   & time {
+     margin-right: 10px;
+     font-weight: lighter;
+   }
+ }
+
+ // tags
+ & .keywords {
+    text-transform: capitalize;
+ }
+}
+
+
+#homelink {
+  color:#4e5c75;
+  display:block;
+  text-align: center;
+}
+
+//pagination
+.posts-pagination {
+
+  & .selected {
+     //font-weight: bold;
+     color: #ccc;
+     pointer-events: none;
+     cursor: default;
+  }
+
+  & a {
+
+    & .next {
+    }
+    color: #d64b55;
+  }
+}
+
+
+.gist {}
+.gist-file
+.gist-data {max-height: 500px;overflow: hidden;height:auto;}
+.gist-data:after{
+  clear:both;
+}
