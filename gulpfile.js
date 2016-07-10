@@ -95,7 +95,7 @@ gulp.task('sass', ['vendor-css'], function () {
 gulp.task('css', ['sass'], function () {
 	return gulp.src([
 		'src/css/vendor.css',
-		'src/css/bootstrap.css'
+		'src/css/style.css'
 	])
 	.pipe(concat_css('all.min.css'))
 	.pipe(minify())
