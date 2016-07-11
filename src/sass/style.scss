@@ -21,6 +21,9 @@ footer {
   margin: 40px 0 60px 0;
 }
 
+#logo{
+  margin-top: 50px;
+}
 
 .menu {
   & ul {
@@ -35,11 +38,6 @@ footer {
 }
 
 .blog-post {
-
-  & ul:last-of-type {
-    //use number as symbol for last list (links)
-    //list-style-type: decimal;
-  }
 
   & blockquote {
     padding: .5rem 1rem;
@@ -142,12 +140,4 @@ footer {
     }
     color: #d64b55;
   }
-}
-
-
-.gist {}
-.gist-file
-.gist-data {max-height: 500px;overflow: hidden;height:auto;}
-.gist-data:after{
-  clear:both;
 }

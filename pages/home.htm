@@ -11,36 +11,34 @@ sortOrder = "published_at desc"
 categoryPage = "blog/tag"
 postPage = "blog/post"
 ==
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="posts-list">
 
-      {# posts #}
-      {% partial 'blogPostsListRaw' %}
+<div class="col-md-8 col-md-offset-2">
+  <div class="posts-list">
 
-      {# pagination #}
-        <div class="posts-pagination text-md-center">
-          {% set posts = blogPosts.posts %}
+    {# posts #}
+    {% partial 'blogPostsListRaw' %}
 
-          {% if posts.lastPage > 1 %}
-            <nav class="btn-group">
-              {% if posts.currentPage > 1 %}
-                <a class="btn btn-outline" href="{{ this.page.baseFileName|page({ pageNr: (posts.currentPage-1) }) }}" rel="prev">
-                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                </a>
-              {% endif %}
+    {# pagination #}
+      <div class="posts-pagination text-md-center">
+        {% set posts = blogPosts.posts %}
 
-              {% for i in 1..posts.lastPage %}
-                <a class="btn btn-outline{{ posts.currentPage == i ? ' selected' }}" href="{{ '' | page({pageNr:i}) }}">{{ i }}</a>
-              {% endfor %}
+        {% if posts.lastPage > 1 %}
+          <nav class="btn-group">
+            {% if posts.currentPage > 1 %}
+              <a class="btn btn-outline" href="{{ this.page.baseFileName|page({ pageNr: (posts.currentPage-1) }) }}" rel="prev">
+                  <i class="fa fa-chevron-left" aria-hidden="true"></i>
+              </a>
+            {% endif %}
 
-              {% if posts.lastPage > posts.currentPage %}
-                <a class="btn btn-outline" href="{{ this.page.baseFileName|page({ pageNr: (posts.currentPage+1) }) }}" rel="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-              {% endif %}
-            </nav>
-          {% endif %}
-      </div>
+            {% for i in 1..posts.lastPage %}
+              <a class="btn btn-outline{{ posts.currentPage == i ? ' selected' }}" href="{{ '' | page({pageNr:i}) }}">{{ i }}</a>
+            {% endfor %}
 
+            {% if posts.lastPage > posts.currentPage %}
+              <a class="btn btn-outline" href="{{ this.page.baseFileName|page({ pageNr: (posts.currentPage+1) }) }}" rel="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+            {% endif %}
+          </nav>
+        {% endif %}
     </div>
   </div>
 </div>

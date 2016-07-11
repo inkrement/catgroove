@@ -10,26 +10,21 @@ function onStart()
     //return Redirect::to('http://google.com');
     $slug_raw = Request::segment(1);
     $slug = str_slug($slug_raw);
-    
+
     if (!empty($slug)){
         $num = Db::table('rainlab_blog_posts')->where('slug', $slug)->count();
-        
+
         if($num > 0){
-            
+
             return Redirect::to('post/'.$slug);
         }
     }
 }
 ?>
 ==
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      
-      
+<div class="col-md-8 col-md-offset-2">
 
     <h2>The page you requested is unfortunately nowhere to be found!</h2>
-    
+
     <p class="lead">Don't worry, I am sure you find a few other quite interesting posts ;)</p>
-    
-    </div>
 </div>
