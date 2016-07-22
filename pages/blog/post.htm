@@ -33,14 +33,6 @@ function onEnd()
 {% set post = blogPost.post %}
 
 <div class="col-md-8 col-md-offset-2">
-  <a href="/" id="homelink">
-
-  <span class="fa-stack fa-lg">
-    <i class="fa fa-circle-thin fa-stack-2x"></i>
-    <i class="fa fa-home fa-stack-1x"></i>
-  </span>
-
-  Home</a> <br><br>
 
   <article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
     <div class="blog-header">
@@ -76,7 +68,7 @@ function onEnd()
               </span>
           {% endif %}
           on <time itemprop="datePublished" datetime="{{ post.published_at|date('Y-m-d') }}">{{ post.published_at|date('M d, Y') }}</time>
-          by <span itemprop="author">{{ post.user.full_name }}</span>
+          by <span itemprop="author publisher">{{ post.user.full_name }}</span>
       </p>
     </footer>
   </article>

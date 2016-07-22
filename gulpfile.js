@@ -27,7 +27,6 @@ gulp.task('vendor-scripts', ['bower'], function () {
 		.pipe(notify({
 		  message: 'vendor js'
 		}));
-
 });
 
 gulp.task('vendor-scss', function() {
@@ -65,7 +64,12 @@ gulp.task('vendor-fonts', ['bower'], function () {
 
 });
 
-gulp.task('scripts', ['vendor-scripts'], function () {
+gulp.task('scripts-chartjs', function(){
+	return gulp.src('bower_components/Chart.js/dist/Chart.bundle.min.js')
+	.pipe(gulp.dest('assets/js'));
+});
+
+gulp.task('scripts', ['vendor-scripts', 'scripts-chartjs'], function () {
 	return gulp.src([
 		'src/js/vendor.js',
 		'src/js/main.js'

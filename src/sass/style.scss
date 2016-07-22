@@ -12,6 +12,8 @@
 //----------------------------------*\
 // GENERAL
 //----------------------------------*/
+$blaugrau : #4e5c75;
+$darkred : #d64b55;
 
 header {
   margin:60px 0 40px 0;
@@ -25,15 +27,15 @@ footer {
   margin-top: 50px;
 }
 
-.menu {
-  & ul {
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
+#navigation {
+  margin-bottom: 30px;
 
-    & li {
-      display: inline;
-    }
+  & a {
+    color: #ddd;
+  }
+
+  & a:hover {
+    color: $blaugrau;
   }
 }
 
@@ -43,7 +45,7 @@ footer {
     padding: .5rem 1rem;
     margin-bottom: 1rem;
     font-size: 1.25rem;
-    border-left: .25rem solid #eceeef
+    border-left: .25rem solid #eceeef;
   }
 
 
@@ -76,12 +78,6 @@ footer {
 .post {
   padding-bottom: 20px;
 
-  /*
-  & p {
-    font-family: $font-family-serif;
-  }
-  */
-
   // post date
   & time {
     font-weight: bold;
@@ -112,16 +108,10 @@ footer {
  }
 
  // tags
- & .keywords {
+ & .keywords a {
     text-transform: capitalize;
+    padding-right: 1px;
  }
-}
-
-
-#homelink {
-  color:#4e5c75;
-  display:block;
-  text-align: center;
 }
 
 //pagination
@@ -138,6 +128,6 @@ footer {
 
     & .next {
     }
-    color: #d64b55;
+    color: $darkred;
   }
 }

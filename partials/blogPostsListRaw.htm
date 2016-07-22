@@ -5,25 +5,34 @@
 
     <h2 class="post-title">
       <a href="{{ post.url }}" itemprop="url">
-        <span itemprop="headline">{{ post.title }}</span>
+        <span itemprop="headline name">{{ post.title }}</span>
       </a>
     </h2>
 
     <p class="post-excerpt" itemprop="description">{{ post.excerpt }}</p>
 
     <p class="post-info">
-        
+
+        <span itemprop="author publisher" hidden>Christian Hotz-Behofsits</span>
+
+
+
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <time itemprop="datePublished" datetime="{{ post.published_at|date('Y-m-d') }}">{{ post.published_at|date('F dS, Y') }}</time>
-        
+
+          <time itemprop="datePublished" datetime="{{ post.published_at|date('Y-m-d') }}">{{ post.published_at|date('F dS, Y') }}</time>
+
+        {% if post.updated_at |date('Y-m-d') != post.published_at |date('Y-m-d') %}
+          (<span itemprop="dateModified" datetime="{{ post.updated_at|date('Y-m-d') }}">{{ post.updated_at|date('F dS, Y') }}</span>)
+        {% endif %}
+
         {% if post.categories.count %}
         <i class="fa fa-tags" aria-hidden="true"></i>
         <span class="keywords" itemprop="keywords">
-        
+
           {% for category in post.categories %}
               <a href="{{ category.url }}">{{ category.name }}</a>
           {% endfor %}
-        
+
         </span>
         {% endif %}
     </p>

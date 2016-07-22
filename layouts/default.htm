@@ -35,6 +35,21 @@ description = "Default layout"
 
     {% styles %}
     <link href="{{ ['assets/css/all.min.css']|theme }}" rel="stylesheet">
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(["setDomains", ["*.justrocketscience.com"]]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//stats.cloudhipsters.com/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
 </head>
 
 <body class="page-{{ this.page.id }} layout-{{ this.layout.id }}">
@@ -46,10 +61,15 @@ description = "Default layout"
       <div class="row">
           <div id="logo" class="col-md-6 col-md-offset-3">
               <a href="/">
-                <img class="center-block" src="{{ 'assets/images/logo.png' | theme }}" alt="logo">
+                <img class="center-block img-fluid" src="{{ 'assets/images/logo.png' | theme }}" alt="logo">
             </a>
           </div>
       </div>
+
+      <div class="row">
+        {% partial 'nav' %}
+      </div>
+
 
       <div class="row">
           {% page %}
@@ -58,14 +78,14 @@ description = "Default layout"
 
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="copyright text-md-center">&copy; Christian Hotz-Behofsits. All rights reserved. | <a href="/impressum">Impressum</a></div>
-    </footer>
+    {% partial 'footer' %}
 
     <!-- Scripts -->
     <script src="{{ ['assets/js/all.min.js']|theme }}"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <!--{% framework extras %} -->
     {% scripts %}
+    <noscript><p><img src="//stats.cloudhipsters.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
   </body>
 </html>
